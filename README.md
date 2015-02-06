@@ -8,4 +8,7 @@ The way I have structured the project, just pull the code and import that as an 
 This Java project currently contains about 50 solved problems. 
 Soon to be completely commented with explanations
 
+This project currently contains about 50 solved problems. 
+Soon to be completely commented with explanations
+
 Enjoy 
