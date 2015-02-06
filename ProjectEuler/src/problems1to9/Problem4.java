@@ -1,22 +1,31 @@
 package problems1to9;
 
-//correct
-import java.lang.reflect.Array;
-import java.util.LinkedList;
+import personal_library.MathFunctions;
 
+//Question -----------------------------------------------------------------------------------------------------------------------
+// A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+// Find the largest palindrome made from the product of two 3-digit numbers.
+//---------- -----------------------------------------------------------------------------------------------------------------------
+//Solution correct  
 
 public class Problem4 {
 
 	public static void main(String[] args) {
+		// used to loop through all possibilities of 3 digit number multiplication combinations 
 		int number1 = 1;
 		int number2 = 1; 
+		
+		// records current largestPalandrome
 		int largestPalandrome = 0; 
 		
 		
+		// loop through all possibilities, not repeating the same multiplication
+		// check (current > largestPalandrome && ... ) first for efficiency 
 		while(number1 < 1000){
+			int current; 
 			while(number2 < 1000){
-				int current = number1 * number2; 
-				if(checkPalandrome(current) && current > largestPalandrome){
+				current = number1 * number2; 
+				if(current > largestPalandrome && MathFunctions.checkPalandrome(current)){
 			        largestPalandrome = current; 
 				}
 				number2++; 
@@ -28,43 +37,6 @@ public class Problem4 {
 		System.out.println(largestPalandrome);
 	}
 	
-	public static boolean checkPalandrome(int a){
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		LinkedList<Integer> list2 = new LinkedList<Integer>();
-		int tempStorage = 0; 
-		
-		//make the list of parsed integers 
-		while(a > 0){
-			tempStorage = a - ((a / 10) * 10);
-			list.add(tempStorage);
-			a /= 10; 
-		}
-		
-		//make a new list the reverse way 
-		for(int i = 0; i < list.size();i++){
-			list2.add(list.get(list.size() - (i+1)));
-		}
-		
-		//compare lists 
-		for(int i = 0; i < list.size(); i++){
-			if(!list.get(i).equals(list2.get(i))){
-				return false; 
-			}
-			
-			
-		}
-		
-		//if it got this far its a palandrome 
-		return true; 
-		
-		
-		
-		
-		
-			
-		
-	}
-
 }
 
 
