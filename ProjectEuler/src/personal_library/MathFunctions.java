@@ -35,7 +35,7 @@ public class MathFunctions {
 				number /= 10; 
 			}
 			
-			// 
+			// Go through list from opposite ends comparing values 
 			int listSize = list.size();
 			for(int i = 0; i < listSize; i++){
 				if(list.get(i) != list.get(listSize - (i + 1))){
@@ -43,7 +43,7 @@ public class MathFunctions {
 				}
 			}
 			
-			//if it got this far it's a palandrome 
+			// if it got this far it's a palandrome 
 			return true; 
 			
 		}
