@@ -21,11 +21,18 @@ public class MathFunctionsTest {
 
 
 	@Test
-	public void test() {
+	public void testCheckPrime() {
 		assertFalse(MathFunctions.checkPrime(1));
 		assertTrue(MathFunctions.checkPrime(2));
 		assertTrue(MathFunctions.checkPrime(29));
 		assertFalse(MathFunctions.checkPrime(111));
 	}
 
+	@Test
+	public void testCheckPalandrome(){
+		assertTrue(MathFunctions.checkPalandrome(191));
+		assertTrue(MathFunctions.checkPalandrome(18899881));
+		assertFalse(MathFunctions.checkPalandrome(12));
+		assertFalse(MathFunctions.checkPalandrome(1987657891));
+	}
 }
