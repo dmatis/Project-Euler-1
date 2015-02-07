@@ -32,8 +32,9 @@ public class Problem4 {
 			}
 			number1++; 
 			number2 = 1; 
-			
 		}
+
+		// print out the answer 
 		System.out.println(largestPalandrome);
 	}
 	

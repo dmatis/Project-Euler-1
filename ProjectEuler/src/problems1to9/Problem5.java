@@ -19,6 +19,7 @@ public class Problem5 {
 	// Yes you could add 60 instead etc etc ... 
 		while(!breakNow){
 			if(checkDivisibleFromOneToTwenty(a)){
+				// print out the answer 
 				System.out.println(a);
 				breakNow = true; 
 			}
