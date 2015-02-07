@@ -8,8 +8,8 @@ public class MathFunctions {
 	// Check if the number is a prime, 1 is not prime. 
 		public static boolean checkPrime(long primeNumber) {
 			int a = 2; 
-			
-			if (primeNumber == 1) {
+
+			if (primeNumber == 1 || primeNumber == 0) {
 				return false; 
 			}
 			while(a <= Math.sqrt(primeNumber)){

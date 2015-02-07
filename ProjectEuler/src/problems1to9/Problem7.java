@@ -1,40 +1,33 @@
 package problems1to9;
 
-//correct 
-//contains prime - int method 
+import personal_library.MathFunctions;
+
+//Question -----------------------------------------------------------------------------------------------------------------------
+// By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+// What is the 10 001st prime number?
+//---------- -----------------------------------------------------------------------------------------------------------------------
+//Solution correct 
+
 public class Problem7 {
 
 	public static void main(String[] args) {
-		int a = 0; 
+		int nthPrime = 0; 
 		int primeNumber = 2; 
-		int currentHigh = 0; 
 		
-		while(a < 10001){
-			if(checkPrime(primeNumber)){
-				a++; 
-				currentHigh = primeNumber;
-				primeNumber++; 
+		// go through till 10,001st prime number is reached
+		while(nthPrime < 10001){
+			if(MathFunctions.checkPrime(primeNumber)){
+				nthPrime++; 
 			}
-			else{
+			
+			// don't add one to the 10,001st prime
+			if(nthPrime != 10001){
 				primeNumber++; 
 			}
 		}
-		System.out.println(currentHigh);
-		//System.out.println(primeNumber);
-	}
-
-	
-	
-	//checks if given integer is prime 
-	private static boolean checkPrime(int primeNumber) {
-		int a = 2; 
-		while(a <= Math.sqrt(primeNumber)){
-			if(primeNumber % a == 0){
-				return false;
-			}
-			a++; 
-		}
-     return true; 
+		
+		// print out the answer 
+		System.out.println(primeNumber);
 	}
 
 }
