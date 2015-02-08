@@ -1,49 +1,59 @@
 package problems10to19; 
 
-//correct
-//careful with size of integers in chain! 
-
-import java.math.BigInteger;
-
+//Question -----------------------------------------------------------------------------------------------------------------------
+//  The following iterative sequence is defined for the set of positive integers:
+//
+//  	n → n/2 (n is even)
+//  	n → 3n + 1 (n is odd)
+//
+//  Using the rule above and starting with 13, we generate the following sequence:
+//
+//		13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+//	It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+//
+//	Which starting number, under one million, produces the longest chain?
+//
+//	NOTE: Once the chain starts the terms are allowed to go above one million.
+//---------- -----------------------------------------------------------------------------------------------------------------------
+// Solution correct 
 
 public class Problem14 {
 
 	public static void main(String[]args){
+		long number = 0; 
+		long sequenceLength = 0; 
 		
-		int number = 0; 
-		int sequenceLength = 0; 
-		
-		for(int i = 1; i < 1*1E6;i++){
-			int newSequenceLength = findSequenceLength(i);
+		// Go through finding the sequence length on every 
+		// number under one million
+		for(long i = 1; i < 1*1E6;i++){
+			long newSequenceLength = findSequenceLength(i);
 			if(newSequenceLength > sequenceLength){
 				number = i; 
 				sequenceLength = newSequenceLength; 
 			}
-		//	System.out.println(i);
 		}
-		
+		// Print out the answer 
 		System.out.println(number);
 		
 	}
-
-	private static int findSequenceLength(int i) {
-		int sequenceLength = 0; 
-		BigInteger number = BigInteger.valueOf(i);
+	// Private Function
+	// Find the Collatz Sequence length:(*= 3 + 1 if odd, /2 if even) 
+	private static long findSequenceLength(long number) {
+		long sequenceLength = 0; 		
 		
-		
-		while(!number.equals(BigInteger.ONE)){
-		if(number.remainder(BigInteger.valueOf(2)).equals(BigInteger.ZERO)){
-			number = number.divide(BigInteger.valueOf(2));
-			sequenceLength++; 
+		// repeat the sequence till at 1 
+		while(number != 1){
+			if(number % 2 == 0){
+				number /= 2; 
+				sequenceLength++; 
+			}
+			else{
+				number *= 3; 
+				number++;
+				sequenceLength++; 
+				
+			}
 		}
-		else{
-			number = number.multiply(BigInteger.valueOf(3));
-			number = number.add(BigInteger.ONE);
-			sequenceLength++; 
-			
-		}
-	}
-		
 		return sequenceLength; 
 	}
 }
