@@ -46,12 +46,10 @@ public class Problem14 {
 			if(number % 2 == 0){
 				number /= 2; 
 				sequenceLength++; 
-			}
-			else{
+			} else {
 				number *= 3; 
 				number++;
 				sequenceLength++; 
-				
 			}
 		}
 		return sequenceLength; 
