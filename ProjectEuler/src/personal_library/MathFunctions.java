@@ -47,5 +47,28 @@ public class MathFunctions {
 			return true; 
 			
 		}
+		
+		// Requires: Number is > 0, x is > 0
+		// Returns the number of divisors, including 1 and the number itself 
+		public static boolean overXDivisors(int x, int number){
+			int recorder = 1; 
+			int score = 0; 
+			
+			if(number == 1){
+				return 1 > x; 
+			}
+			
+			while(recorder <= Math.sqrt(number)){
+				if(number%recorder == 0){
+					score++; 
+				}
+				recorder++;
+			}
+			
+			if(score > (x/2))
+				return true;
+			else
+				return false; 
+		}
 	
 }

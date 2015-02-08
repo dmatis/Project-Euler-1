@@ -35,4 +35,12 @@ public class MathFunctionsTest {
 		assertFalse(MathFunctions.checkPalandrome(12));
 		assertFalse(MathFunctions.checkPalandrome(1987657891));
 	}
+	
+	@Test
+	public void testOverXDivisors(){
+		// 10 has 4 divisors, 1, 2, 5, 10
+		assertFalse(MathFunctions.overXDivisors(4, 10));
+		assertTrue(MathFunctions.overXDivisors(3, 10));
+		assertFalse(MathFunctions.overXDivisors(1, 1));
+	}
 }
