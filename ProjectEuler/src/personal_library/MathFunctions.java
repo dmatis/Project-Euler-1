@@ -70,5 +70,32 @@ public class MathFunctions {
 			else
 				return false; 
 		}
+		
+		
+		//  Checks if the number is an amicable number:
+		//  Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
+		//	If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
+		//	
+		//		For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
+		//  
+		//  It will return false for numbers <= 0  
+		public static boolean amicableNumber(int number){
+			if(number == sumOfDivisers(sumOfDivisers(number)) && number != sumOfDivisers(number)){
+				return true; 
+			}else
+				return false; 
+		}
+
+		//  Returns the sum of all the proper divisors less than x,
+		//  1 is included. It will return 0 if the number <= 1
+		public static int sumOfDivisers(int x) {
+			int sum = 0; 
+			for(int i = 1; i < x; i++){
+				if(x%i == 0){
+					sum+=i;
+				}
+			}
+			return sum; 
+		}
 	
 }

@@ -43,4 +43,24 @@ public class MathFunctionsTest {
 		assertTrue(MathFunctions.overXDivisors(3, 10));
 		assertFalse(MathFunctions.overXDivisors(1, 1));
 	}
+	
+	@Test
+	public void testAmicableNumber(){
+		assertTrue(MathFunctions.amicableNumber(220));
+		assertFalse(MathFunctions.amicableNumber(-3));
+		assertFalse(MathFunctions.amicableNumber(0));
+		assertFalse(MathFunctions.amicableNumber(1));
+		assertFalse(MathFunctions.amicableNumber(10));
+		
+	}
+	@Test
+	public void testSumOfDivisers(){
+		assertEquals(0,MathFunctions.sumOfDivisers(-1));
+		assertEquals(0,MathFunctions.sumOfDivisers(0));
+		assertEquals(0,MathFunctions.sumOfDivisers(1));
+		assertEquals(1,MathFunctions.sumOfDivisers(2));
+		// 1 + 2 + 3 + 4 + 6
+		assertEquals(16,MathFunctions.sumOfDivisers(12));
+	}
+
 }
