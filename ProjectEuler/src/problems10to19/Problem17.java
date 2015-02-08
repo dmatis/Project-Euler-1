@@ -1,13 +1,20 @@
 package problems10to19; 
 
-//correct 
-//careful - forty not fourty 
+//Question -----------------------------------------------------------------------------------------------------------------------
+// If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+// If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+// NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
+//---------- -----------------------------------------------------------------------------------------------------------------------
+// Solution correct 
+
 public class Problem17 {
 	
 	public static void main(String[]args){
 		int total = 0; 
+
 		for(int i = 1; i < 1001; i++){
-			//Ones Place 1-9
+			// Add the amount of letters for the 1s place
+			// Always Constant
 			if(i%10 == 1){
 				total+= 3; 
 			}
@@ -35,12 +42,14 @@ public class Problem17 {
 	    	else if(i%10 == 9){
 	    		total+=4; 
 	    	}
-			//and
+			// Add the letters for a potentially needing an "and" 
 			if(i > 100 && !(i%100==0)){
 				total += 3; 
 			}
 			
-			//10-19
+			// Deal with the cases for 10-19 (an exception to standard 1s place rule)
+			// 'total +=' and 'total -=' included to make it more clear, subtracting the normal 
+			// 1s place addition and adding length of full word 
 			if((i/10)%10 == 1){
 				if(i%100 == 10){
 					total+= 3;
@@ -84,7 +93,7 @@ public class Problem17 {
 				}
 				
 			}
-			//20-90
+			// Dealing with the cases between 20-90
 			if((i/10)%10 == 2){
 				total += 6;
 			}
@@ -109,7 +118,9 @@ public class Problem17 {
 			if((i/10)%10 == 9){
 				total += 6;
 			}
-			//hundreds 	
+
+			// Dealing with the different hundreds cases
+			// eg. 100 or 200 or 300 (same for 300 and 302 and 349 etc...)
 			if((i/100)%10 == 1){
 				total+= 10; 
 			}
@@ -138,8 +149,8 @@ public class Problem17 {
 				total += 11; 
 			}
 		}
+
+		// Print out the answer
 		System.out.println(total + 11);
 	}
-	
-
 }
