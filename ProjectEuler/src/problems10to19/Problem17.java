@@ -151,6 +151,7 @@ public class Problem17 {
 		}
 
 		// Print out the answer
+		// The +11 is for 'o''n''e''t''h''o''u''s''a''n''d'
 		System.out.println(total + 11);
 	}
 }
