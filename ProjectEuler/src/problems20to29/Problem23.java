@@ -16,7 +16,7 @@ import personal_library.MathFunctions;
 // Solution correct 
 
 public class Problem23 {
-	
+	// Test for Arlo 
 	// Strategy:
 	// Go through all the numbers between 1 and 28123 and find all the abundant numbers.
 	// While doing this, also find the totalSum of all the numbers from 1 to 28123.
