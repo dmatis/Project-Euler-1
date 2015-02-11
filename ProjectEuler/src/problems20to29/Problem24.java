@@ -1,56 +1,50 @@
 package problems20to29;
 
-//correct 
-//slow - takes 180 seconds 
-import java.util.List;
-import java.util.LinkedList;
-
+//Question -----------------------------------------------------------------------------------------------------------------------
+// A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
+// 	012   021   102   120   201   210
+// What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+//---------- -----------------------------------------------------------------------------------------------------------------------
+// Solution correct 
 
 public class Problem24 {
 
 	public static void main(String[] args) {
-		//smallest number with all digits (assume that there is a 0 in front - 0123456789)
-		long number = 123456789;
-		//recording which number we are currently on 
-		int recorder = 0; 
-		boolean running = true; 
+	
+		
+		long number = 123456789;      // smallest number with all digits (assume that there is a 0 in front - 0123456789)
+		int numberOfPermutations = 0; // recording which number we are currently on 
+		boolean running = true;       // clean loop-control variable
 		
 		while(running){
 			if(checkContainsAllDigits(number)){
-				recorder++; 
-				//System.out.println(recorder);
-				if(recorder == 1E6){
+				numberOfPermutations++; 
+				if(numberOfPermutations == 1E6){
 					System.out.println(number);
 					running = false; 
 				}
-				   
-				
+				   				
 			}
-			number++; 
-			
+			number++;  			
 		}
 
 	}
+	
 
 	private static boolean checkContainsAllDigits(long number) {
-		List<Long> digits = new LinkedList<Long>();
-		long tempHolder = 0; 
+		int [] digits = new int[10]; 
+		int tempHolder = 0; 
 		boolean smallNumber = number < 1000000000;
 				
 		while(number>0){
-			tempHolder = number%10; 
-			if(digits.contains(tempHolder)||(smallNumber && tempHolder == 0)){
+			tempHolder = (int)(number % 10);  
+			if(digits[tempHolder]++ != 0){
 				return false; 
 			}
-			else{
-				digits.add(tempHolder);
-				number/=10; 
-			}
+			number /= 10; 
 		}
-		
-		return true; 
-		
-		
+	
+		return !smallNumber || (digits[0] == 0);
 	}
 
 }
