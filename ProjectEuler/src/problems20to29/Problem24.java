@@ -6,7 +6,7 @@ package problems20to29;
 // What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 //---------- -----------------------------------------------------------------------------------------------------------------------
 // Solution correct 
-
+//
 public class Problem24 {
 
 	public static void main(String[] args) {
