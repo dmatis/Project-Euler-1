@@ -7,6 +7,8 @@ package problems20to29;
 //---------- -----------------------------------------------------------------------------------------------------------------------
 // Solution correct 
 //
+
+//test
 public class Problem24 {
 
 	public static void main(String[] args) {
