@@ -51,6 +51,7 @@ public class Problem24 {
 		// Also adds 1 to number so it can continue the search linearly 
 		if(!smallNumber || (digits[0] == 0)){
 			if(++numberOfPermutations == 1E6){
+				// Print out the answer
 				System.out.println(number);
 				running = false;
 			}
