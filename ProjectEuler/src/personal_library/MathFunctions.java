@@ -97,5 +97,45 @@ public class MathFunctions {
 			}
 			return sum; 
 		}
-	
+		
+		// Return the smallest prime number greater than CurrentNumber
+		// Note: Will return 2 if you give it a number < 2
+		public static long getNextPrime(long currentNumber) {
+			for(long index = currentNumber + 1; ;index++) {
+				if(MathFunctions.checkPrime(index)){
+					return index; 
+				}
+			}
+		}
+		
+		
+		// Requires: number and x are both positive 
+		// Returns whether or not that number has x distinct prime factors 
+		public static boolean hasXPrimeFactors(long number, int x) {
+			long numberOfFactors = 0;
+			long currentDivider  = 2; 
+			boolean count = true; 
+			for( ; ; ){
+				if(number == 1){
+					if(numberOfFactors == x) {
+						return true;
+					} else {
+						return false; 
+					}
+				}
+				if(number % currentDivider == 0) {
+					number /= currentDivider;
+					if(count) {
+						numberOfFactors++;
+						if(numberOfFactors > x){
+							return false; 
+						}
+						count = false; 
+					}				
+				} else {
+					currentDivider = MathFunctions.getNextPrime(currentDivider);
+					count = true; 
+				}
+			}
+		}	
 }

@@ -62,5 +62,45 @@ public class MathFunctionsTest {
 		// 1 + 2 + 3 + 4 + 6
 		assertEquals(16,MathFunctions.sumOfDivisers(12));
 	}
+	
+	@Test 
+	public void testGetNextPrime(){
+		assertEquals(MathFunctions.getNextPrime(0), 2);
+		assertEquals(MathFunctions.getNextPrime(-1), 2);
+		assertEquals(MathFunctions.getNextPrime(5), 7);
+		assertEquals(MathFunctions.getNextPrime(12), 13);
+		assertEquals(MathFunctions.getNextPrime(19), 23);
+	}
+	
+	@Test
+	public void	testHasXPrimeFactors(){
+		assertTrue(MathFunctions.hasXPrimeFactors(15, 2));
+		assertTrue(MathFunctions.hasXPrimeFactors(8, 1));
+		assertTrue(MathFunctions.hasXPrimeFactors(10, 2));
+		assertTrue(MathFunctions.hasXPrimeFactors(2 * 2 * 2 * 3 * 3 * 3 * 7 * 11, 4));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
