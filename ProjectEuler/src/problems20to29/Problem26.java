@@ -48,52 +48,63 @@ import personal_library.MathFunctions;
 //		prime! This makes the search must faster as well as getting rid of situations where the recurrence does not begin at the first digit!
 public class Problem26 {
 
-	private static int answer; 
-	private static int index; 
-	private static boolean notFound;
-	private static int currentGreatestLength; 
+	private static int greatestDenom;				// the denominator that currently produces the greatest recurrence-length 
+	private static int currrentDenom; 				// current denominator between 1 and a 1000
+	private static boolean notFound;				// clean loop-control variable
+	private static int currentGreatestLength; 		// recording the current greatest length 
  
 	public static void main(String[] args) {
-		currentGreatestLength = 0; 
-		for(index = 1; index < 1000; index++) {
-			if(MathFunctions.checkPrime(index)) {
+		currentGreatestLength = 0; 				
+
+		// Go through all the prime denominators from 1-1000 using the technique specified above in *GeneralIdea*
+		for(currrentDenom = 1; currrentDenom < 1000; currrentDenom++) {
+			if(MathFunctions.checkPrime(currrentDenom)) {
 				notFound = true; 
-				int a = 0; 
+				int length = 0;						// To record the length of the nines/tens (eg length = 3 results in 999 or 1000) 
 				while(notFound) {	
-					checkOverNines(a);
-					checkOverTens(a);
-				    a++;
+					checkOverNines(length);			// seeing if it has a recurrence 
+					checkOverTens(length);			// seeing if it has no recurrence 
+				    length++;
 				}
 			}
 		}
 		// Print out the answer
-        System.out.println(answer);
+        System.out.println(greatestDenom);
 	}
 
 	// Private Function
-	// 
-	private static void checkOverTens(int a) {
-		BigInteger biggieSmalls = BigInteger.TEN;
-		for(int b = 0; b < a; b++) {
-			biggieSmalls = biggieSmalls.multiply(BigInteger.TEN);
+	// refer to *general idea* for purpose
+	private static void checkOverTens(int n) {
+		
+		// get 10^(n + 1) 
+		BigInteger tens = BigInteger.TEN;
+		for(int b = 0; b < n; b++) {
+			tens = tens.multiply(BigInteger.TEN);
 		}
-		if(biggieSmalls.remainder(BigInteger.valueOf(index)).equals(BigInteger.ZERO)) {
-			notFound = false; 
+		
+		// check if 10^(n+1) % currentDenom == 0 
+		if(tens.remainder(BigInteger.valueOf(currrentDenom)).equals(BigInteger.ZERO)) {
+			notFound = false; 						// this number has no recurrence 
 		}	
 	}
 
 	// Private Function
-	// 
+	// refer to *general idea* for purpose
 	private static void checkOverNines(int a) {
-		String nines = "9";
+
+		// get 999... where there are a+1 nines 
+		String ninesString = "9";
 		for(int i = 0; i < a;i++) {
-			nines = nines.concat("9");
+			ninesString = ninesString.concat("9");
 		}
-		BigInteger ninesNumber = new BigInteger(nines);
-		if(ninesNumber.remainder(BigInteger.valueOf(index)).equals(BigInteger.ZERO)) {
-			if(nines.length() > currentGreatestLength) {
-				answer = index; 
-				currentGreatestLength = nines.length();
+		BigInteger ninesBigInt = new BigInteger(ninesString);
+
+		// if 999... % currentDenom == 0 then the number has a recurrence equal to the length of ninesBigInt
+		if(ninesBigInt.remainder(BigInteger.valueOf(currrentDenom)).equals(BigInteger.ZERO)) {
+			// check if this recurrence is bigger than the current biggest
+			if(ninesString.length() > currentGreatestLength) {
+				greatestDenom = currrentDenom; 
+				currentGreatestLength = ninesString.length();
 			}
 			notFound = false; 
 		}		
