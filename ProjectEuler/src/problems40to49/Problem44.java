@@ -24,15 +24,17 @@ public class Problem44 {
 	private static long foundDif = Long.MAX_VALUE; 						// The current difference with a successful pair 
 	
 	public static void main(String[] args) {
+		
+		// Generate a million pentagonal numbers 
+		for(long i = 1; i < 1E6; i++){
+			pentagonalNumbers.add(i * (3 * i - 1) / 2);
+		}
+
 		// TODO COMMENT 
 		while((nextNumber - currentNumber) < foundDif) {
-			// make sure there is enough pentagon-numbers
-			if((pentagonalNumbers.size() - currentIndex) < 50){
-				add100Numbers();
-			}
-
+	
 			// go from right to left checking if it is a successful pair, stop if a pair is found
-			for(comparingIndex = currentIndex; comparingIndex >= 0; comparingIndex--) {
+			for(comparingIndex = currentIndex - 1; comparingIndex >= 0; comparingIndex--) {
 				if(successfulpair()) {
 					foundDif = currentNumber - pentagonalNumbers.get(comparingIndex);
 					break;
@@ -61,49 +63,23 @@ public class Problem44 {
 	//
 	//
 	private static boolean findSum() {
-		int findIndex = currentIndex + 1;
-		long sum = currentNumber + pentagonalNumbers.get(comparingIndex); 
+		long numberCheck = currentNumber + pentagonalNumbers.get(comparingIndex);
+		return isPentagonal(numberCheck);
+	}
 
-		for(long numberCheck = pentagonalNumbers.get(findIndex); numberCheck <= sum; numberCheck = pentagonalNumbers.get(findIndex)) {
-			if(numberCheck == sum) {
-				return true; 
-			}
-			findIndex++; 
-		}
-
-		return false; 
+	// Private Function
+	//
+	//
+	private static boolean findDif() {
+		long numberCheck = currentNumber - pentagonalNumbers.get(comparingIndex);
+		return isPentagonal(numberCheck);
 	}
 	
 	// Private Function
 	//
 	//
-	private static boolean findDif() {
-		int findIndex = 0; 
-		if(currentIndex != 0){
-			findIndex = currentIndex - 1;
-		}
-		
-		long dif = currentNumber - pentagonalNumbers.get(comparingIndex); 
-
-		for(long numberCheck = pentagonalNumbers.get(findIndex); numberCheck <= dif && findIndex >= 1; numberCheck = pentagonalNumbers.get(findIndex)) {
-			if(numberCheck == dif) {
-				return true; 
-			}
-			findIndex--; 
-		}
-
-		return false;
-	}
-
-	// Private Function
-	//
-	//
-	private static void add100Numbers() {		
-		for(int i = 0; i < 100; i++) {
-			int n = currentIndex + i;
-			long number = n*(3*n - 1)/2;
-			pentagonalNumbers.add(number);
-		}
+	private static boolean isPentagonal(long numberCheck) {
+		// TODO 			
 	}
 
 }
