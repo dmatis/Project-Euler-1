@@ -11,12 +11,15 @@ package problems30to39;
 //---------- -----------------------------------------------------------------------------------------------------------------------
 // Solution correct
 
-// The only thing to note about this problem/solution (excerpt found online):
-// 		You can prove that the numbers need to be of the form A:X/X:B, by eliminating the other forms (notation: 4:5 = 45). 
-// 		For example, if A:X/B:X = A/B then (10*A + X)/(10*B + X) = A/B, or X*B = X*A. 
-// 		Now the problem stipulates that X can't be zero (i.e. the trivial example), so B = A, which would imply that A:X/B:X = 1, 
-// 		but the problem also states that the fraction needs to be less than 1, so this form is eliminated.
-// 		Proceed similarly with the other forms, and you're left with just one form: A:X/X:B.
+// The only thing to note about this problem/solution is that for fraction ab/cd there is no need to check 
+// if digit a cancels with c or if digit b cancels with d, you only need to check if a cancels with d and 
+// if b cancels with c. (Write it out on paper and basic algebra eliminates two cases)
+//
+// CASE1: AX/BX --> Impossible
+// CASE2: XA/XB --> Impossible
+// CASE3: AX/XB --> Possible
+// CASE4: XA/BX --> Possible
+
 public class Problem33 {
 
 	public static void main(String[] args) {
@@ -31,7 +34,7 @@ public class Problem33 {
 				double denominator = denom; 					// set denominator 
 				double fraction = numerator / denominator;		// get actual value of fraction as double
 				
-				if(fraction == cancelDigitSecond(numer,denom)) {
+				if(fraction == cancelNumberFirst(numer,denom) || fraction == cancelNumberSecond(numer,denom)) {
 					System.out.println(numer + "/" + denom);	// print out fraction out of curiosity
 					currentNumeratorProduct *= numerator; 		// update currentNumeratorProduct
 					currentDenominatorProduct *= denominator; 	// update currentDenominatorProduct
@@ -46,7 +49,7 @@ public class Problem33 {
 	// Returns: -1 if this fraction is not a fraction which has digits that can be cancelled, otherwise returns 
 	// the fraction of the remaining uncanceled digits. This function only attempts to remove the second  
 	// digit in the numerator with the first digit in the denominator.
-	private static double cancelDigitSecond(int a, int b) {
+	private static double cancelNumberSecond(int a, int b) {
 		// If the second digit in the numerator is the same as the first digit in the denominator, does a check 
 		// to make sure the uncanceled digit in the denominator is not zero because you can't divide by zero 
 		if(String.valueOf(a).charAt(1) == String.valueOf(b).charAt(0) && String.valueOf(b).charAt(1) != '0') {
@@ -55,4 +58,19 @@ public class Problem33 {
 			return -1; 
 		}		
 	}
+
+	// Private Function
+	// Returns: -1 if this fraction is not a fraction which has digits that can be cancelled, otherwise returns 
+	// the fraction of the remaining uncanceled digits. This function only attempts to remove the first  
+	// digit in the numerator with the second digit in the denominator. 
+	private static double cancelNumberFirst(int a, int b) {
+		// If the first digit in the numerator is the same as the second digit in the denominator, does a check 
+		// to make sure the uncanceled digit in the denominator is not zero because you can't divide by zero
+		if(String.valueOf(a).charAt(0) == String.valueOf(b).charAt(1) && String.valueOf(b).charAt(0) != '0') {
+			return (double)(a%10)/(double)(b/10);
+		} else {
+			return -1; 
+		}			
+	}
+
 }
