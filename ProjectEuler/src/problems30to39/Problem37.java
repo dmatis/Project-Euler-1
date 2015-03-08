@@ -1,73 +1,67 @@
 package problems30to39;
 
-//correct
-//easy just use divide and modolos 
+import personal_library.MathFunctions;
+
+//Question -----------------------------------------------------------------------------------------------------------------------
+// The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right, and remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work from right to left: 3797, 379, 37, and 3.
+//
+// Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
+//
+// NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+//---------- -----------------------------------------------------------------------------------------------------------------------
+// Solution correct
+
 public class Problem37 {
 
 	public static void main(String[] args) {
-		int total = 0; 
-		int number = 10;
-		int sum = 0; 
+		int total = 0; 										// the current number of trunc-primes found
+		int sum = 0; 										// sum of the eleven trunc-primes
 
-		System.out.println(trunctablePrime(3797));
-		while(total < 11){
+		for(int currentNumber = 10; total < 11; currentNumber++) {
 			//so that I dont have to change reverse number 
-			if(number%10 != 0){
-				if(trunctablePrime(number)){
-					System.out.println(number);
-					sum +=number; 
+			if(currentNumber%10 != 0) {
+				if(trunctablePrime(currentNumber)) {
+					System.out.println(currentNumber);
+					sum +=currentNumber; 
 					total++; 
-				}
-	
-			
+				}			
 			}
-			number++;
 		}
 		
+		// print out the answer
 		System.out.println(sum);
-
 	}
 	
-	private static boolean trunctablePrime(int number){
+	// Private Function
+	// 
+	private static boolean trunctablePrime(int number) {
 		return checkLeftToRightPrime(number) && checkRightToLeftPrime(number);
 	}
 
 
-
+	// Private Function
+	// 
 	private static boolean checkRightToLeftPrime(int number) {
-		while(number>0){ 
-			if(!checkPrime(number))
+		while(number>0) { 
+			if(!MathFunctions.checkPrime(number)) {
 				return false;
+			}
 			number /= 10;
 		}
 		return true; 
-			
 	}
-
+	
+	// Private Function 
+	// 
 	private static boolean checkLeftToRightPrime(int number) {
 		String tempString = String.valueOf(number);
 		int length = tempString.length(); 
 		
 		for(int i = 0; i < length; i++){
 			int tempNumber = (int) (number%(Math.pow(10, i)));
-			if(!checkPrime(tempNumber))
+			if(!MathFunctions.checkPrime(tempNumber))
 				return false; 
 		}
 		return true; 
 	}
-
-	//checks if given integer is prime 
-	private static boolean checkPrime(int primeNumber) {
-		int a = 2; 
-		if(primeNumber == 1)
-			return false; 
-		while(a <= Math.sqrt(primeNumber)){
-			if(primeNumber % a == 0){
-				return false;
-			}
-			a++; 
-		}
-     return true; 
-	}
-
 }
