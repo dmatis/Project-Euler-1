@@ -80,7 +80,17 @@ public class MathFunctionsTest {
 		assertTrue(MathFunctions.hasXPrimeFactors(2 * 2 * 2 * 3 * 3 * 3 * 7 * 11, 4));
 	}
 	
-	
+	@Test
+	public void testPandigital() {
+		assertFalse(MathFunctions.checkPandigital(1));
+		assertFalse(MathFunctions.checkPandigital(1209));
+		assertFalse(MathFunctions.checkPandigital(12345678));
+		assertFalse(MathFunctions.checkPandigital(987123450));
+		assertFalse(MathFunctions.checkPandigital(1234567890));
+		assertTrue(MathFunctions.checkPandigital(123456789));
+		assertTrue(MathFunctions.checkPandigital(987456321));
+		assertFalse(MathFunctions.checkPandigital(-123456789));
+	}
 	
 	
 	

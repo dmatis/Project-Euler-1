@@ -1,6 +1,8 @@
 package personal_library;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class MathFunctions {
 
@@ -137,5 +139,20 @@ public class MathFunctions {
 					count = true; 
 				}
 			}
-		}	
+		}
+		
+		// Requires: Positive number (input)
+		// Returns: True if the number contains 1 copy of all the digits from 1-9 and no other digits 
+		public static boolean checkPandigital(int number) {
+			Set<Integer> digits = new HashSet<Integer>();
+			while(number > 0) {
+				int tempInt = number%10; 
+				if(tempInt == 0) {
+					return false; 
+				}
+				digits.add(tempInt);
+				number/=10; 
+			}	
+			return digits.size() == 9; 
+		}
 }
