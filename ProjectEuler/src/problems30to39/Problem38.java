@@ -32,7 +32,8 @@ public class Problem38 {
 		// print out the answer 
 		System.out.println(currentMax); 
 	}
-
+	
+	// Private Function
 	// Returns: Either a 9 digit number that is the pandigital-concatenated-product or 0, 0 meaning that 
 	// it has no pandigital concatenated-product. 
 	public static long checkNumber(int number) {
