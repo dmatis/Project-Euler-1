@@ -85,6 +85,7 @@ public class MathFunctionsTest {
 		assertFalse(MathFunctions.checkPandigital(1));
 		assertFalse(MathFunctions.checkPandigital(1209));
 		assertFalse(MathFunctions.checkPandigital(12345678));
+		assertFalse(MathFunctions.checkPandigital(1234567899));
 		assertFalse(MathFunctions.checkPandigital(987123450));
 		assertFalse(MathFunctions.checkPandigital(1234567890));
 		assertTrue(MathFunctions.checkPandigital(123456789));

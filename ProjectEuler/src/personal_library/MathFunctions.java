@@ -143,10 +143,13 @@ public class MathFunctions {
 		
 		// Requires: Positive number (input)
 		// Returns: True if the number contains 1 copy of all the digits from 1-9 and no other digits 
-		public static boolean checkPandigital(int number) {
-			Set<Integer> digits = new HashSet<Integer>();
+		public static boolean checkPandigital(long number) {
+			if(String.valueOf(number).length() != 9) {
+				return false; 
+			}
+			Set<Long> digits = new HashSet<Long>();
 			while(number > 0) {
-				int tempInt = number%10; 
+				long tempInt = number%10; 
 				if(tempInt == 0) {
 					return false; 
 				}

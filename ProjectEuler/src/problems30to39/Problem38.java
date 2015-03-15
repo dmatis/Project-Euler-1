@@ -1,94 +1,64 @@
 package problems30to39;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import personal_library.MathFunctions;
 
+//Question -----------------------------------------------------------------------------------------------------------------------
+//	Take the number 192 and multiply it by each of 1, 2, and 3:
+//	
+//	    192 × 1 = 192
+//	    192 × 2 = 384
+//	    192 × 3 = 576
+//	
+//	By concatenating each product we get the 1 to 9 pandigital, 192384576. We will call 192384576 the concatenated product of 192 and (1,2,3)
+//	
+//	The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5, giving the pandigital, 918273645, which is the concatenated product of 9 and (1,2,3,4,5).
+//	
+//	What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
+//---------- -----------------------------------------------------------------------------------------------------------------------
+// Solution correct
 
 public class Problem38 {
 
-	private static int biggestAns = 0; 
-
 	public static void main(String[] args) {
-			build();
-			System.out.println(biggestAns);
+			// Print out the answer
+			System.out.println(checkAllNumbers());
 	}
 
-	private static void build() {
-		buildOneAndTwo();
-		buildThree();
-		buildFour();
-	}
+	public static long checkAllNumbers() {
+		long currentMax = 0; 									// the current max concatenated-product
 
-	public static boolean pandigital(int currentNumber){
-	Set<Integer> digits = new HashSet<Integer>();
-		while(currentNumber > 0){
-		int tempInt = currentNumber%10; 
-		if(tempInt == 0)
-			return false; 
-		digits.add(tempInt);
-		currentNumber/=10; 
+		// Go through all the digits between 1-9999 and check if their concatenated-products are pandigital.
+		// No need to check beyond 4-digits because their concatenated-products will be at least 10 digits long. 
+		for(int i = 0; i <= 9999; i++) {
+			if(checkNumber(i) > currentMax) {
+				currentMax = checkNumber(i);
+			}
 		}
-		return digits.size() == 9; 
+		return currentMax; 
 	}
 
-	public static void buildOneAndTwo(){
-		for(int i = 1; i < 100; i++){
-			List<String> possibleConcats = new ArrayList<String>();
-			possibleConcats.add(String.valueOf(i));
-			possibleConcats.add(String.valueOf(i * 2));
-			possibleConcats.add(String.valueOf(i * 3));
-			possibleConcats.add(String.valueOf(i * 4));
-			possibleConcats.add(String.valueOf(i * 5));
-			possibleConcats.add(String.valueOf(i * 6));
-			possibleConcats.add(String.valueOf(i * 7));
-			possibleConcats.add(String.valueOf(i * 8));
-			possibleConcats.add(String.valueOf(i * 9));
-			String a = ""; 
-			int index = 0; 
-			while(a.length() < 9){
-			a = a.concat(possibleConcats.get(index)); 
-			index++; 
-			}
-			if(a.length() == 9){
-				int aInt = Integer.parseInt(a);
-				if(pandigital(aInt)){
-					if(aInt > biggestAns)
-						biggestAns = aInt; 
-				}
-			}
-				
-		}
-	}
-
-	public static void buildThree(){
-		for(int i = 100; i < 334; i++){
-			String a = String.valueOf(i);
-			String b = String.valueOf(i * 2);
-			String c = String.valueOf(i * 3);
-			a = a.concat(b).concat(c);
-			int aInt = Integer.parseInt(a); 
-			if(pandigital(aInt)){
-				if(aInt > biggestAns)
-					biggestAns = aInt; 
-			}
+	// Returns: Either a 9 digit number that is the concatenated-product or 0, 0 meaning that 
+	// it has no concatenated-product. 
+	public static long checkNumber(int number) {
+		String products = String.valueOf(number);				// use a string to record the products 
 		
-
+		// Go through and keep concatenating products as long as it is less than 9 digits 
+		for(int i = 2; products.length() < 9; i++) {
+			products = products.concat(String.valueOf(i * number));
 		}
 		
-	}
-	public static void buildFour(){
-		for(int i = 5000; i < 10000; i++){
-			String a = String.valueOf(i);
-			String b = String.valueOf(i * 2);
-			a = a.concat(b);
-			int aInt = Integer.parseInt(a);
-			if(pandigital(aInt)){
-				if(aInt > biggestAns)
-					biggestAns = aInt; 
-			}
-			
+		long concatProduct = Long.valueOf(products);			// Convert to a long to pass it to checkPandigital 
+	
+		// If it is pandigital then return it, otherwise return 0
+		if(MathFunctions.checkPandigital(concatProduct)) {
+			return concatProduct;
+		} else {
+			return 0; 
 		}
 	}
 }
+
+
+
+
+
