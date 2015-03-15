@@ -20,11 +20,6 @@ import personal_library.MathFunctions;
 public class Problem38 {
 
 	public static void main(String[] args) {
-			// Print out the answer
-			System.out.println(checkAllNumbers());
-	}
-
-	public static long checkAllNumbers() {
 		long currentMax = 0; 									// the current max concatenated-product
 
 		// Go through all the digits between 1-9999 and check if their concatenated-products are pandigital.
@@ -34,11 +29,12 @@ public class Problem38 {
 				currentMax = checkNumber(i);
 			}
 		}
-		return currentMax; 
+		// print out the answer 
+		System.out.println(currentMax); 
 	}
 
-	// Returns: Either a 9 digit number that is the concatenated-product or 0, 0 meaning that 
-	// it has no concatenated-product. 
+	// Returns: Either a 9 digit number that is the pandigital-concatenated-product or 0, 0 meaning that 
+	// it has no pandigital concatenated-product. 
 	public static long checkNumber(int number) {
 		String products = String.valueOf(number);				// use a string to record the products 
 		
