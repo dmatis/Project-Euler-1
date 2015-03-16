@@ -1,63 +1,51 @@
 package problems40to49;
 
-//correct
-//slow 210 seconds 
-import java.util.LinkedList;
-import java.util.List;
+import personal_library.MathFunctions;
 
+//Question -----------------------------------------------------------------------------------------------------------------------
+// We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital and is also prime
+//
+// What is the largest n-digit pandigital prime that exists?
+//---------- -----------------------------------------------------------------------------------------------------------------------
+// Solution correct
+// Runtime long: 45 seconds
 
 public class Problem41 {
 
-
-	
 	public static void main(String[] args) {
-		for(long i = 987654321; i >0; i--){
-			//System.out.println(i);
-			if(checkPandigital(i)&&checkPrime(i)){
+		boolean looking = true; 							// clean loop-control variable 
+
+		// Start at the highest n-pandigital and go down from there checking if the
+		// number is both n-pandigital and prime 
+		for(long i = 987654321; looking; i -= 2) {
+			if(checkPandigital(i) && MathFunctions.checkPrime(i)) {
+				// print out the answer
 				System.out.println(i);
-				break; 
-			}
-				
+				looking = false;  
+			}				
 		}
-
-	}
+	}	
 	
-	
-	
-	private static boolean checkPandigital(long i) {
-		String tempString = String.valueOf(i);
-		int length = tempString.length(); 
-		List<Integer> tempList = new LinkedList<Integer>();
-		long biggestNumber = 0;
+	// Private Function
+	// Returns: true if the number is n-digit-pandigital (it is pandigital from 1..n where n is the number of digits)
+	private static boolean checkPandigital(long number) {
+		int length = String.valueOf(number).length(); 		// length of number
+		int [] digits = new int[10];						// array used for parsing the digits 
 		
-		for(int a = 0; a < length;a++){
-			if(tempList.contains((int)(i%10)) || i%10 == 0)
+		// Parse the number in a way that array[x] == number of occurrences of the digit x in the number 
+		while(number > 0) {
+			digits[(int)(number % 10)]++;
+			number /= 10; 
+		}
+		
+		// Go through the array and make sure that there is 1 of every digit up to the length of the number
+		for(int i = 0; i < length; i++) {
+			if(digits[i+1] != 1) {
 				return false; 
-			if(i%10 > biggestNumber)
-				biggestNumber = i%10; 
-			tempList.add((int) (i%10));
-			i/=10;
-		}
-		
-		if(biggestNumber == length)
-			return true;
-		else
-			return false; 
-		
-	}
-
-
-
-	//checks if given integer is prime 
-	private static boolean checkPrime(long primeNumber) {
-		int a = 2; 
-		while(a <= Math.sqrt(primeNumber)){
-			if(primeNumber % a == 0){
-				return false;
 			}
-			a++; 
 		}
-     return true; 
+		return true; 
 	}
-
 }
+
+
